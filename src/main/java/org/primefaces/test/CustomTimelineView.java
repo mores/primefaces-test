@@ -5,9 +5,13 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
+import org.primefaces.component.timeline.Timeline;
+import org.primefaces.component.timeline.TimelineUpdater;
 import org.primefaces.model.timeline.TimelineEvent;
 import org.primefaces.model.timeline.TimelineModel;
 
@@ -65,5 +69,21 @@ public class CustomTimelineView implements Serializable {
 
     public Date getEnd() {
         return end;
+    }
+
+    public void onEdit( org.primefaces.event.timeline.TimelineModificationEvent event ) {
+	Timeline source = (Timeline)event.getSource();
+	TimelineUpdater timelineUpdater = TimelineUpdater.getCurrentInstance( source.getClientId() );
+
+	TimelineEvent timelineEvent = event.getTimelineEvent();
+	int index = model.getIndex( timelineEvent );
+	timelineEvent.setData( "Changed" );
+	timelineUpdater.update( timelineEvent, index );
+
+	/*
+	 * Does not as expected either
+	timelineUpdater.delete( index );
+	timelineUpdater.add( timelineEvent );
+	*/
     }
 }
