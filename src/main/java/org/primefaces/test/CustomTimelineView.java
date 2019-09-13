@@ -33,7 +33,7 @@ public class CustomTimelineView implements Serializable {
         end = cal.getTime();
 
         // groups
-        String[] NAMES = new String[] {"User 1", "User 2", "User 3", "User 4", "User 5", "User 6"};
+        String[] NAMES = new String[] {"User 1"};
 
         // create timeline model
         model = new TimelineModel();
@@ -42,7 +42,6 @@ public class CustomTimelineView implements Serializable {
             now = new Date();
             Date end = new Date(now.getTime() - 12 * 60 * 60 * 1000);
 
-            for (int i = 0; i < 5; i++) {
                 Date start = new Date(end.getTime() + Math.round(Math.random() * 5) * 60 * 60 * 1000);
                 end = new Date(start.getTime() + Math.round(4 + Math.random() * 5) * 60 * 60 * 1000);
 
@@ -52,7 +51,6 @@ public class CustomTimelineView implements Serializable {
                 // create an event with content, start / end dates, editable flag, group name and custom style class
                 TimelineEvent event = new TimelineEvent(availability, start, end, true, name, availability.toLowerCase());
                 model.add(event);
-            }
         }
     }
 
@@ -74,5 +72,13 @@ public class CustomTimelineView implements Serializable {
 
     public void onEdit(TimelineModificationEvent event) {
 	System.out.println("onEdit");
+	TimelineEvent timelineEvent = event.getTimelineEvent();
+	java.util.Date endDate = timelineEvent.getEndDate();
+	System.out.println("EndDate from timelineEvent: " + endDate);
+
+	for(TimelineEvent modelEvent : model.getEvents())
+	{
+	    System.out.println("EndDate from model: " + modelEvent.getEndDate());
+	}	
     }
 }
