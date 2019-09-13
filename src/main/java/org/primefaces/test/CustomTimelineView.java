@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 
+import org.primefaces.event.timeline.TimelineModificationEvent;
 import org.primefaces.model.timeline.TimelineEvent;
 import org.primefaces.model.timeline.TimelineModel;
 
@@ -65,5 +66,13 @@ public class CustomTimelineView implements Serializable {
 
     public Date getEnd() {
         return end;
+    }
+
+    public void onDelete(TimelineModificationEvent event) {
+	System.out.println("onDelete");
+    }
+
+    public void onEdit(TimelineModificationEvent event) {
+	System.out.println("onEdit");
     }
 }
