@@ -43,7 +43,7 @@ public class CustomTimelineView implements Serializable {
             Date end = new Date(now.getTime() - 12 * 60 * 60 * 1000);
 
                 Date start = new Date(end.getTime() + Math.round(Math.random() * 5) * 60 * 60 * 1000);
-                end = new Date(start.getTime() + Math.round(4 + Math.random() * 5) * 60 * 60 * 1000);
+                end = new Date(start.getTime() + 2 * 60 * 60 * 1000);
 
                 long r = Math.round(Math.random() * 2);
                 String availability = (r == 0 ? "Unavailable" : (r == 1 ? "Available" : "Maybe"));
@@ -75,6 +75,8 @@ public class CustomTimelineView implements Serializable {
 	TimelineEvent timelineEvent = event.getTimelineEvent();
 	java.util.Date endDate = timelineEvent.getEndDate();
 	System.out.println("EndDate from timelineEvent: " + endDate);
+
+	model.update(timelineEvent);
 
 	for(TimelineEvent modelEvent : model.getEvents())
 	{
