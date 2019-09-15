@@ -71,6 +71,10 @@ public class CustomTimelineView implements Serializable {
         }
     }
 
+    public Map<String,String> getColors() {
+	    return colors;
+    }
+
     public String getCss() {
 
 	    String css = "";
