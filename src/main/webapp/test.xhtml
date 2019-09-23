@@ -14,5 +14,33 @@
 
         <h1>#{testViewCdi.testString}</h1>
 
+	<h:form id="form">
+		<p:panel header="Test" >
+
+			<h:panelGrid columns="3" >
+				<h:outputLabel value="Default:" for="defaultPojo"/>
+				<h:selectOneMenu id="defaultPojo" value="#{testView.pojo1.defaultPojo2}" converter="omnifaces.SelectItemsConverter" >
+					<f:selectItems value="#{testView.pojo2s.target}" var="pojo" itemValue="#{pojo}" itemLabel="#{pojo.description}"/>
+				</h:selectOneMenu>
+				<p:message for="defaultPojo" />
+			</h:panelGrid>
+
+			<p:spacer height="15" />
+			<p:pickList value="#{testView.pojo2s}"
+	       			    converter="ListConverter"
+				    var="pojo"
+				    itemLabel="#{pojo.description}"
+				    itemValue="#{pojo}"
+				    showSourceControls="false" showTargetControls="true">
+				<f:facet name="sourceCaption">Available</f:facet>
+				<f:facet name="targetCaption">Selected</f:facet>
+				<p:ajax event="transfer" update=":form:defaultPojo" />
+			</p:pickList>
+
+			<p:commandButton value="Save"  action="#{testView.editSave}" ajax="false" onclick="onSubmitButton();"/>
+
+		</p:panel>
+	</h:form>
+
     </h:body>
 </html>
