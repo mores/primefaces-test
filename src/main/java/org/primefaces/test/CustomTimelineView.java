@@ -33,11 +33,12 @@ public class CustomTimelineView implements Serializable {
         end = cal.getTime();
 
         // groups
-        String[] NAMES = new String[] {"User 1", "User 2", "User 3", "User 4", "User 5", "User 6"};
+        String[] NAMES = new String[] {"User 1", "User 2", "User 3", "User 4"};
 
         // create timeline model
         model = new TimelineModel();
 
+	int dbId = 1;
         for (String name : NAMES) {
             now = new Date();
             Date end = new Date(now.getTime() - 12 * 60 * 60 * 1000);
@@ -50,8 +51,15 @@ public class CustomTimelineView implements Serializable {
                 String availability = (r == 0 ? "Unavailable" : (r == 1 ? "Available" : "Maybe"));
 
                 // create an event with content, start / end dates, editable flag, group name and custom style class
-                TimelineEvent event = new TimelineEvent(availability, start, end, true, name, availability.toLowerCase());
+
+		TimelineEventObject teo = new TimelineEventObject();
+		teo.setName("DataBase Id: " + dbId);
+		teo.setLine2(availability);
+
+                TimelineEvent event = new TimelineEvent(teo, start, end, true, name, availability.toLowerCase());
                 model.add(event);
+
+		dbId++;
             }
         }
     }

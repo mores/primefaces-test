@@ -3,6 +3,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
+      xmlns:pe="http://primefaces.org/ui/extensions"
       xmlns:h="http://java.sun.com/jsf/html">
 
     <h:head>
@@ -78,6 +79,7 @@
 <h:form>
 
 <p:timeline id="timeline" value="#{customTimelineView.model}"
+	    var="timelineEventObject"
             editable="true" eventMargin="10" eventMarginAxis="0"
             start="#{customTimelineView.start}"
             end="#{customTimelineView.end}"
@@ -85,6 +87,14 @@
             axisOnTop="true" stackEvents="false">
   <p:ajax event="changed" listener="#{customTimelineView.onEdit}" />
   <p:ajax event="delete" listener="#{customTimelineView.onDelete}" />
+  <h:panelGrid columns="2" cellpadding="1" cellspacing="1">
+  	<pe:gravatar value="#{timelineEventObject.name}" size="57" notFound="monsterid" />
+	<h:panelGrid columns="1" cellpadding="1" cellspacing="1">
+		<h:outputText value="#{timelineEventObject.line1}"/>
+		<h:outputText value="#{timelineEventObject.line2}"/>
+		<h:outputText value="#{timelineEventObject.line3}"/>
+	</h:panelGrid>
+</h:panelGrid>
 </p:timeline>
 
 </h:form>
