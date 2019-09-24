@@ -42,6 +42,11 @@ public class TestView implements Serializable {
 
 		pojos = new org.primefaces.model.DualListModel<Pojo2>(source, target);
 	}
+
+	public java.util.List<Pojo2> getAllPojo2s() {
+		return allPojo2s;
+	}
+
 	public org.primefaces.model.DualListModel<Pojo2> getPojo2s() {
 		return pojos;
 	}
